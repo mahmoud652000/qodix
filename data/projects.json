@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1756318462557,
+    "Name": "Customer Requests and Preferences",
+    "Description": "\"Customer Requests and Interests\" – easy and clear request submission.",
+    "ProjectLink": "",
+    "ProjectType": "design",
+    "UsedTechnology": [
+      "Figma , Adobe XD ,Sketch"
+    ],
+    "TechnologyID": [],
+    "Image": "upload/1756318462544-ui-1.jpg"
+  },
+  {
+    "id": 1756319631408,
+    "Name": "coffee bean",
+    "Description": "Coffee Bean offers an easy and engaging experience for ordering and exploring coffee.",
+    "ProjectLink": "",
+    "ProjectType": "design",
+    "UsedTechnology": [
+      "Figma , Adobe XD ,Sketch"
+    ],
+    "TechnologyID": [],
+    "Image": "upload/1756319631402-ui_2.jpg"
+  },
+  {
+    "id": 1756320709586,
+    "Name": "Store App",
+    "Description": "Store App – A mobile app for easy clothing shopping with product filters.",
+    "ProjectLink": "",
+    "ProjectType": "flutter",
+    "UsedTechnology": [
+      "React Native , Flutter,Context AP"
+    ],
+    "TechnologyID": [],
+    "Image": "upload/1756320709579-fluuter_1.jpg"
+  },
+  {
+    "id": 1756321228070,
+    "Name": "Horus View",
+    "Description": "Horus – A responsive web project showcasing Egypt’s iconic archaeological sites.",
+    "ProjectLink": "https://mahmoud652000.github.io/Horus/",
+    "ProjectType": "web",
+    "UsedTechnology": [
+      "HTML, CSS, JavaScript, Tailwind CSS, AOS, GSAP, Scroll Reveal"
+    ],
+    "TechnologyID": [],
+    "Image": "upload/1756321228064-WhatsApp Image 2025-08-05 at 20.01.21_f1e3e1dd (1).jpg"
+  },
+  {
+    "id": 1756321796957,
+    "Name": "Smart School Manager",
+    "Description": "A smart school system for managing students, attendance, and fees with barcode features.",
+    "ProjectLink": "https://mahmoud652000.github.io/Smart-School-Manager/",
+    "ProjectType": "web",
+    "UsedTechnology": [
+      "HTML, CSS, JavaScript, Tailwind CSS, Node.js, LocalStorage, Barcode API"
+    ],
+    "TechnologyID": [],
+    "Image": "upload/1756321796948-kl.png"
+  },
+  {
+    "id": 1756322033640,
+    "Name": "RedStore",
+    "Description": "RedStore – A modern online shoe store offering trendy and comfortable footwear.",
+    "ProjectLink": "https://mahmoud652000.github.io/RedStore/",
+    "ProjectType": "web",
+    "UsedTechnology": [
+      "HTML, CSS, JavaScript, Tailwind CSS, React.js, Node.js, Firebase"
+    ],
+    "TechnologyID": [],
+    "Image": "upload/1756322033634-112.jpg"
+  }
+]

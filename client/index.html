@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>QODIX</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="./WhatsApp Image 2025-08-24 at 10.03.11_87e1823e.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Font Awesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-rX1N9HnJ4YFvGn9kU6f3ZZzFh2R3jM6fZxY0zY2/lKi6E7H8x8l1Qj5h1u9YNZ+6+2H+8J/w3jkBSj67JBrqUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="./node/public
+/style.css" rel="stylesheet" />
+
+        <!-- ------------------- -->
+   <!-- تأكد من إضافة مكتبة Font Awesome في <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>      
+
+<!-- Bootstrap & FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    </head>
+    <body id="page-top">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    body { text-align: start; } /* لإبقاء المحاذاة الطبيعية رغم RTL */
+    /* مظهر الهوفر الخفيف فقط (بدون حركات دخول) */
+    .hover-link { position: relative; transition: color .2s ease; }
+    .hover-link:hover { color: #ffc107 !important; }
+    .hover-link::after{
+      content:""; position:absolute; inset:auto 0 6px 0; height:2px; width:0; margin:auto;
+      background:#ffc107; transition:width .2s ease;
+    }
+    .hover-link:hover::after{ width:100%; }
+  </style>
+</head>
+
+<!-- ====== Navbar ====== -->
+<!-- إضافة مكتبات Bootstrap و SweetAlert و FontAwesome -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-lg" id="mainNav"
+     style="background:rgba(0, 0, 255, 0.605); padding: 0.6rem 0; min-height: 65px; direction: ltr;">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center fw-bold fs-5 text-uppercase" href="#page-top" style="letter-spacing: 1px;">
+      <img src="./WhatsApp Image 2025-08-24 at 10.03.11_87e1823e.png" alt="Logo" class="me-2 rounded-circle" style="width: 100px; height: 100px; margin-top: -15px;">
+      
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+      <span class="text-white small">Menu</span>
+      <i class="fas fa-bars ms-1"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto fw-semibold small" id="navLinks">
+        <li class="nav-item"><a class="nav-link px-2 hover-link" href="#services"><i class="fas fa-cogs me-1"></i>Services</a></li>
+        <li class="nav-item"><a class="nav-link px-2 hover-link" href="#portfolio"><i class="fas fa-briefcase me-1"></i>Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link px-2 hover-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a></li>
+        <li class="nav-item"><a class="nav-link px-2 hover-link" href="#team"><i class="fas fa-users me-1"></i>Team</a></li>
+        <li class="nav-item"><a class="nav-link px-2 hover-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+
+        <li class="nav-item d-flex align-items-center" id="loginBtn">
+          <a class="nav-link px-2 hover-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="fas fa-sign-in-alt me-1"></i>Login
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0">
+      <div class="modal-header text-white py-2" style="background: linear-gradient(90deg, #0d6efd, #6f42c1);">
+        <h6 class="modal-title"><i class="fas fa-user-lock me-2"></i>Login</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-3">
+        <form id="loginForm">
+          <div class="mb-2">
+            <input type="text" id="username" class="form-control" placeholder="Username" required>
+          </div>
+          <div class="mb-3">
+            <input type="password" id="password" class="form-control" placeholder="Password" required>
+          </div>
+          <button type="submit" class="btn w-100 text-white" style="background: linear-gradient(90deg, #0d6efd, #6f42c1);">
+            <i class="fas fa-sign-in-alt me-1"></i>Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_URL = "/api/auth/login";
+
+document.addEventListener("DOMContentLoaded", () => {
+  checkLoginStatus();
+
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!res.ok) throw new Error("Invalid credentials");
+      const data = await res.json();
+
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("username", data.username);
+
+      bootstrap.Modal.getInstance(document.getElementById("loginModal")).hide();
+      Swal.fire({ icon: 'success', title: `Welcome, ${data.username}`, timer: 1500, showConfirmButton: false });
+
+      checkLoginStatus();
+    } catch (err) {
+      Swal.fire({ icon: 'error', title: 'Login Failed', text: err.message });
+    }
+  });
+});
+
+function checkLoginStatus() {
+  const role = localStorage.getItem("role");
+  const username = localStorage.getItem("username");
+  const loginBtn = document.getElementById("loginBtn");
+
+  if (role) {
+    loginBtn.innerHTML = `
+      <a class="nav-link px-2 hover-link" href="${role === 'admin' ? './dashboard.html' : '/user-dashboard.html'}">
+        <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+      </a>
+      <a class="nav-link px-2 text-danger" href="#" onclick="logout()">
+        <i class="fas fa-sign-out-alt me-1"></i>Logout
+      </a>
+    `;
+  } else {
+    loginBtn.innerHTML = `
+      <a class="nav-link px-2 hover-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+        <i class="fas fa-sign-in-alt me-1"></i>Login
+      </a>
+    `;
+  }
+}
+
+function logout() {
+  localStorage.clear();
+  Swal.fire({ icon: 'success', title: 'Logged out', timer: 1200, showConfirmButton: false });
+  checkLoginStatus();
+}
+</script>
+
+<style>
+.hover-link {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+.hover-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffc107 !important;
+}
+.hover-link i {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.hover-link:hover i {
+  transform: rotate(10deg) scale(1.2);
+  color: #ffc107;
+}
+</style>
+
+
+
+
+
+
+
+<!-- ================================================================================= -->
+        <!-- Masthead-->
+<!-- مكتبات التأثيرات -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+  .masthead {
+    position: relative;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+   
+    background: rgb(32, 44, 206);
+    overflow: hidden;
+  }
+
+  #particles-js {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* اسم الشركة + اللوجو */
+  .company-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .company-logo img {
+    width: 50px;
+    height: 50px;
+    animation: logoSpin 6s linear infinite;
+    filter: drop-shadow(0 0 8px #ffdd00);
+  }
+
+  @keyframes logoSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .company-name {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff6b6b, #f06595, #ffdd00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 3s infinite alternate;
+  }
+
+  @keyframes glow {
+    0% { text-shadow: 0 0 10px #ff6b6b; }
+    50% { text-shadow: 0 0 20px #f06595; }
+    100% { text-shadow: 0 0 30px #ffdd00; }
+  }
+
+  .masthead-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .text-section {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .text-section h1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.3;
+    background: linear-gradient(to right, #ff6b6b, #f06595);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-section p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    opacity: 0.9;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #ff6b6b, #f06595);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  }
+
+  .image-section {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* موبايل */
+  @media (max-width: 768px) {
+    .masthead {
+      height: auto;
+      padding: 50px 20px;
+    }
+    .masthead-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+
+<header class="masthead">
+  <div id="particles-js"></div>
+  <div class="masthead-content" data-aos="fade-up" data-aos-duration="1200">
+    <!-- النصوص -->
+    <div class="text-section">
+      <div class="company-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Logo">
+        <div class="company-name animate__animated animate__pulse animate__infinite">QODIX Web Design Company</div>
+      </div>
+      <h1 id="typewriter"></h1>
+      <p class="animate__animated animate__fadeInUp animate__delay-1s">
+
+      </p>
+      <a href="#services" class="btn-primary animate__animated animate__heartBeat animate__delay-2s">Start Your Project</a>
+    </div>
+
+    <!-- صور متحركة متعددة -->
+    <div class="image-section" data-aos="zoom-in" data-aos-delay="300">
+      <div id="lottie-animation1" style="width: 200px; height: 200px;"></div>
+      <div id="lottie-animation2" style="width: 200px; height: 200px;"></div>
+      <div id="lottie-animation3" style="width: 200px; height: 200px;"></div>
+    </div>
+  </div>
+</header>
+
+<script>
+  AOS.init();
+
+  // كتابة متحركة بالإنجليزية
+  new Typewriter('#typewriter', {
+    strings: [
+      'Innovative Software Solutions',
+      'Professional Website Development',
+      'Mobile App Design & Development',
+      'Your Tech Partner for Success'
+    ],
+    autoStart: true,
+    loop: true,
+    delay: 60
+  });
+
+  // Particles.js
+  particlesJS('particles-js', {
+    "particles": {
+      "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
+      "color": { "value": ["#ffffff", "#ff6b6b", "#f06595"] },
+      "shape": { "type": "circle" },
+      "opacity": { "value": 0.5, "random": true },
+      "size": { "value": 3, "random": true },
+      "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
+      "move": { "enable": true, "speed": 2 }
+    },
+    "interactivity": {
+      "events": {
+        "onhover": { "enable": true, "mode": "grab" },
+        "onclick": { "enable": true, "mode": "push" }
+      },
+      "modes": {
+        "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } },
+        "push": { "particles_nb": 4 }
+      }
+    },
+    "retina_detect": true
+  });
+
+  // Lottie Animations
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-animation1'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'https://assets2.lottiefiles.com/packages/lf20_x62chJ.json'
+  });
+
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-animation2'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'https://assets9.lottiefiles.com/packages/lf20_vnikrcia.json'
+  });
+
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-animation3'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'https://assets1.lottiefiles.com/packages/lf20_totrpclr.json'
+  });
+</script>
+
+
+
+
+<!-- ====== POSTS SECTION ====== -->
+
+
+
+        <!-- ================================================ -->
+        <!-- Services-->
+     <section class="page-section py-5" id="services" style="    background: whitesmoke;
+">
+  <div class="container">
+    <!-- العنوان -->
+    <div class="text-center mb-5">
+      <h2 class="section-heading text-uppercase fw-bold" data-aos="fade-down" data-aos-duration="800">
+        Our Services
+      </h2>
+      <h3 class="section-subheading text-muted" data-aos="fade-up" data-aos-delay="200">
+        We provide high-quality solutions tailored to your needs.
+      </h3>
+    </div>
+
+    <!-- البطاقات -->
+    <div class="row g-4">
+
+      <!-- خدمة 1 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="service-card p-4 rounded-4 shadow-sm bg-white h-100 text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="fas fa-shopping-cart fa-3x text-primary"></i>
+          </div>
+          <h4 class="fw-bold mb-3">E-Commerce</h4>
+          <p class="text-muted">Build and scale your online store with powerful tools and responsive design.</p>
+        </div>
+      </div>
+
+      <!-- خدمة 2 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="service-card p-4 rounded-4 shadow-sm bg-white h-100 text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="fas fa-mobile-alt fa-3x text-success"></i>
+          </div>
+          <h4 class="fw-bold mb-3">Responsive Design</h4>
+          <p class="text-muted">Deliver an optimal viewing experience across all devices and platforms.</p>
+        </div>
+      </div>
+
+      <!-- خدمة 3 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+        <div class="service-card p-4 rounded-4 shadow-sm bg-white h-100 text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="fas fa-lock fa-3x text-danger"></i>
+          </div>
+          <h4 class="fw-bold mb-3">Web Security</h4>
+          <p class="text-muted">Protect your website with top-notch security solutions and best practices.</p>
+        </div>
+      </div>
+
+      <!-- خدمة 4 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+        <div class="service-card p-4 rounded-4 shadow-sm bg-white h-100 text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="fas fa-search fa-3x text-warning"></i>
+          </div>
+          <h4 class="fw-bold mb-3">SEO Optimization</h4>
+          <p class="text-muted">Improve your ranking and visibility on search engines effectively.</p>
+        </div>
+      </div>
+
+      <!-- خدمة 5 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="500">
+        <div class="service-card p-4 rounded-4 shadow-sm bg-white h-100 text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="fas fa-cogs fa-3x text-info"></i>
+          </div>
+          <h4 class="fw-bold mb-3">Custom Web Apps</h4>
+          <p class="text-muted">Develop tailored web applications to fit your business goals.</p>
+        </div>
+      </div>
+
+      <!-- خدمة 6 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
+        <div class="service-card p-4 rounded-4 shadow-sm bg-white h-100 text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="fas fa-cloud fa-3x text-secondary"></i>
+          </div>
+          <h4 class="fw-bold mb-3">Cloud Solutions</h4>
+          <p class="text-muted">Leverage cloud technologies for better scalability and efficiency.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CSS -->
+<style>
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .service-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .service-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.15);
+  }
+</style>
+
+<!-- مكتبات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+
+
+        <!-- Portfolio Grid-->
+    <!-- Portfolio Section -->
+<section class="page-section py-5" id="portfolio" style="background: #f4f6f8;">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="section-heading text-uppercase fw-bold">Portfolio</h2>
+      <h3 class="section-subheading text-muted">Some of our latest creative works.</h3>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="text-center mb-4">
+      <button class="btn btn-outline-primary m-1 filter-btn active" data-filter="all">
+        <i class="fas fa-th-large me-1"></i> All
+      </button>
+      <button class="btn btn-outline-primary m-1 filter-btn" data-filter="web">
+        <i class="fas fa-globe me-1"></i> Web
+      </button>
+      <button class="btn btn-outline-primary m-1 filter-btn" data-filter="flutter">
+        <i class="fab fa-flutter me-1"></i> Flutter
+      </button>
+      <button class="btn btn-outline-primary m-1 filter-btn" data-filter="design">
+        <i class="fas fa-paint-brush me-1"></i> Design
+      </button>
+    </div>
+
+    <!-- Projects -->
+    <div class="row g-4 portfolio-container" id="portfolio-container"></div>
+
+  </div>
+</section>
+
+<!-- ScrollReveal Library -->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<script>
+async function loadProjects() {
+  try {
+    const res = await fetch('http://localhost:3000/api/Project');
+    const projects = await res.json();
+
+    const container = document.getElementById('portfolio-container');
+    container.innerHTML = '';
+
+    projects.forEach((p, index) => {
+      const item = document.createElement('div');
+      const type = p.ProjectType?.toLowerCase() || "web";
+      item.className = "col-lg-4 col-sm-6 portfolio-item";
+      item.setAttribute("data-category", type);
+
+      let typeIcon = "fas fa-th-large", typeColor = "primary";
+      if(type === "web") { typeIcon = "fas fa-globe"; typeColor = "primary"; }
+      if(type === "flutter") { typeIcon = "fab fa-flutter"; typeColor = "info"; }
+      if(type === "design") { typeIcon = "fas fa-paint-brush"; typeColor = "warning"; }
+
+      let techBadges = "";
+      try {
+        const techArray = Array.isArray(p.UsedTechnology) ? p.UsedTechnology : JSON.parse(p.UsedTechnology || "[]");
+        techArray.forEach(t => {
+          techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`;
+        });
+      } catch(e) { console.warn("UsedTechnology parse error", e); }
+
+      item.innerHTML = `
+        <div class="portfolio-card rounded shadow-sm overflow-hidden position-relative">
+          <img src="http://localhost:3000/${p.Image?.replace(/\\/g,'/')}" class="img-fluid w-100 card-img" alt="${p.Name}">
+          <div class="overlay d-flex flex-column justify-content-end p-3">
+            <span class="badge bg-${typeColor} mb-2 text-uppercase">
+              <i class="${typeIcon} me-1"></i>${type}
+            </span>
+            <h5 class="fw-bold mb-1">${p.Name}</h5>
+            <p class="text-light small mb-2">${p.Description}</p>
+            <div class="tech-container d-flex flex-wrap">${techBadges}</div>
+            <a href="${p.ProjectLink || '#'}" target="_blank" class="stretched-link"></a>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(item);
+
+      // ScrollReveal effect
+      ScrollReveal().reveal(item, {
+        delay: index * 100,
+        distance: '50px',
+        origin: 'bottom',
+        opacity: 0,
+        easing: 'ease-in-out',
+        duration: 800,
+        reset: false
+      });
+    });
+
+    initFilter();
+  } catch(err) {
+    console.error('Error loading projects:', err);
+  }
+}
+
+function initFilter() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const category = btn.getAttribute('data-filter');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+      portfolioItems.forEach((item, index) => {
+        if(category === 'all' || item.getAttribute('data-category') === category) {
+          item.style.display = 'block';
+          item.style.opacity = 0;
+          setTimeout(() => {
+            item.style.opacity = 1;
+            ScrollReveal().reveal(item, { delay: index*50, distance: '20px', origin: 'bottom', opacity: 0, duration: 600 });
+          }, 50);
+        } else {
+          item.style.opacity = 0;
+          setTimeout(() => item.style.display = 'none', 300);
+        }
+      });
+    });
+  });
+}
+
+loadProjects();
+</script>
+
+<style>
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+.portfolio-card img.card-img {
+  transition: transform 0.5s ease, filter 0.5s ease;
+  object-fit: cover;
+  height: 250px;
+}
+
+.portfolio-card:hover img.card-img {
+  transform: scale(1.08);
+  filter: brightness(0.75);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: #fff;
+  padding: 1rem;
+  transition: all 0.4s ease;
+}
+
+.tech-container .tech-badge {
+  font-size: 0.75rem;
+  padding: 0.25em 0.5em;
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem;
+  background: linear-gradient(135deg, #6f42c1, #0d6efd);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-container .tech-badge:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.filter-btn.active {
+  background-color: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+  transition: all 0.3s ease;
+}
+
+@media(max-width: 768px){
+  .portfolio-card img.card-img { height: 200px; }
+}
+</style>
+
+
+
+<!-- About-->
+  
+ <section class="page-section bg-light py-5" id="about">
+  <div class="container">
+
+    <!-- العنوان -->
+    <div class="text-center mb-5" data-aos="fade-down" data-aos-duration="1200" data-aos-easing="ease-in-out">
+      <h2 class="section-heading text-uppercase fw-bold">About Qodix</h2>
+      <h3 class="section-subheading text-muted">
+        We craft innovative software solutions for the modern world.
+      </h3>
+    </div>
+
+    <!-- التايم لاين -->
+    <ul class="timeline">
+      <li data-aos="fade-right" data-aos-duration="1000" data-aos-delay="100">
+        <div class="timeline-image bg-primary text-white d-flex align-items-center justify-content-center">
+          <i class="fas fa-lightbulb fa-2x"></i>
+        </div>
+        <div class="timeline-panel" data-aos="zoom-in" data-aos-delay="200">
+          <div class="timeline-heading">
+            <h4>2015</h4>
+            <h4 class="subheading">The Beginning</h4>
+          </div>
+          <div class="timeline-body">
+            <p class="text-muted">
+              Qodix بدأت كفريق صغير شغوف بتقديم تطبيقات ويب وموبايل عالية الجودة.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-inverted" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+        <div class="timeline-image bg-success text-white d-flex align-items-center justify-content-center">
+          <i class="fas fa-code fa-2x"></i>
+        </div>
+        <div class="timeline-panel" data-aos="zoom-in" data-aos-delay="300">
+          <div class="timeline-heading">
+            <h4>2018</h4>
+            <h4 class="subheading">Expanding Services</h4>
+          </div>
+          <div class="timeline-body">
+            <p class="text-muted">
+              توسعنا لتقديم حلول تطوير متكاملة تشمل الويب، تطبيقات الهواتف، ومنصات سحابية.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300">
+        <div class="timeline-image bg-warning text-white d-flex align-items-center justify-content-center">
+          <i class="fas fa-robot fa-2x"></i>
+        </div>
+        <div class="timeline-panel" data-aos="zoom-in" data-aos-delay="400">
+          <div class="timeline-heading">
+            <h4>2021</h4>
+            <h4 class="subheading">Innovation with AI</h4>
+          </div>
+          <div class="timeline-body">
+            <p class="text-muted">
+              دخلنا مجال الذكاء الاصطناعي، وطورنا حلولًا ذكية للأتمتة والتحليلات وإنترنت الأشياء.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-inverted" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
+        <div class="timeline-image bg-danger text-white d-flex align-items-center justify-content-center">
+          <i class="fas fa-globe fa-2x"></i>
+        </div>
+        <div class="timeline-panel" data-aos="zoom-in" data-aos-delay="500">
+          <div class="timeline-heading">
+            <h4>2025</h4>
+            <h4 class="subheading">Global Impact</h4>
+          </div>
+          <div class="timeline-body">
+            <p class="text-muted">
+              نخدم الآن عملاء حول العالم ببناء منتجات رقمية آمنة وقابلة للتوسع.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <!-- النهاية -->
+      <li class="timeline-inverted" data-aos="zoom-in-up" data-aos-duration="1200" data-aos-delay="500">
+        <div class="timeline-image bg-dark text-white d-flex align-items-center justify-content-center">
+          <h4 class="m-0 text-center">
+            Be Part<br>Of Our<br>Story!
+          </h4>
+        </div>
+      </li>
+    </ul>
+
+    <!-- مجالات الشركة -->
+    <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="1000">
+      <h4 class="fw-bold mb-4">Our Expertise</h4>
+      <div class="row g-4">
+        <div class="col-6 col-md-3" data-aos="flip-left" data-aos-delay="100" data-aos-duration="800">
+          <i class="fas fa-laptop-code fa-2x text-primary mb-2"></i>
+          <p class="fw-bold mb-1">Web Development</p>
+          <small class="text-muted d-block">
+            تصميم وتطوير مواقع تفاعلية باستخدام أحدث التقنيات مثل React, Laravel و Node.js.
+          </small>
+        </div>
+        <div class="col-6 col-md-3" data-aos="flip-left" data-aos-delay="200" data-aos-duration="800">
+          <i class="fas fa-mobile-alt fa-2x text-success mb-2"></i>
+          <p class="fw-bold mb-1">Mobile Apps</p>
+          <small class="text-muted d-block">
+            إنشاء تطبيقات أندرويد و iOS عالية الأداء باستخدام Flutter و React Native.
+          </small>
+        </div>
+        <div class="col-6 col-md-3" data-aos="flip-left" data-aos-delay="300" data-aos-duration="800">
+          <i class="fas fa-brain fa-2x text-warning mb-2"></i>
+          <p class="fw-bold mb-1">AI & ML</p>
+          <small class="text-muted d-block">
+            تطوير حلول ذكاء اصطناعي للتنبؤ، تحليل البيانات، ومعالجة الصور باستخدام Python و TensorFlow.
+          </small>
+        </div>
+        <div class="col-6 col-md-3" data-aos="flip-left" data-aos-delay="400" data-aos-duration="800">
+          <i class="fas fa-network-wired fa-2x text-danger mb-2"></i>
+          <p class="fw-bold mb-1">IoT Solutions</p>
+          <small class="text-muted d-block">
+            ربط الأجهزة بالإنترنت وتطوير أنظمة تحكم ذكية تعمل في الزمن الحقيقي.
+          </small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- مكتبة الحركات -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({
+    once: true,
+    duration: 800,
+    offset: 100,
+    easing: 'ease-in-out'
+  });
+</script>
+<!-- ------------Animated Counter------------------- -->
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+.stats {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1551434678-e076c223a692') center/cover no-repeat;
+  padding: 70px 0;
+  color: #fff;
+  text-align: center;
+}
+
+.stats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7); /* Overlay شفاف */
+}
+
+.stats-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+.stat-box {
+  width: 200px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  transition: transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.stat-box i {
+  animation: pulse 2s infinite;
+}
+
+.stat-box.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+</style>
+
+<section class="stats">
+  <div class="stats-content">
+    <div class="stat-box">
+      <i class="fas fa-briefcase fa-3x" style="color:#f39c12;"></i>
+      <h3 class="counter" data-target="250">0</h3>
+      <p>مشاريع ناجحة</p>
+    </div>
+    <div class="stat-box">
+      <i class="fas fa-users fa-3x" style="color:#2ecc71;"></i>
+      <h3 class="counter" data-target="120">0</h3>
+      <p>عملاء سعداء</p>
+    </div>
+    <div class="stat-box">
+      <i class="fas fa-trophy fa-3x" style="color:#e74c3c;"></i>
+      <h3 class="counter" data-target="50">0</h3>
+      <p>جوائز</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const counters = document.querySelectorAll('.counter');
+const boxes = document.querySelectorAll('.stat-box');
+const speed = 200;
+
+counters.forEach((counter, index) => {
+  const updateCount = () => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const increment = target / speed;
+
+    if (count < target) {
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(updateCount, 20);
+    } else {
+      counter.innerText = target;
+    }
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      boxes[index].classList.add('show');
+      updateCount();
+      observer.disconnect();
+    }
+  }, { threshold: 0.5 });
+
+  observer.observe(boxes[index]);
+});
+</script>
+
+
+
+
+
+        <!-- Team-->
+   <section class="page-section bg-light" id="team">
+  <div class="container">
+    <!-- العنوان -->
+    <div class="text-center mb-5" data-aos="fade-down">
+      <h2 class="section-heading text-uppercase fw-bold">Our Amazing Team</h2>
+      <h3 class="section-subheading text-muted">
+        Meet the creative minds behind Qodix's success.
+      </h3>
+    </div>
+
+    <!-- أعضاء الفريق -->
+    <div class="row g-4">
+      <!-- عضو 1 -->
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="team-member text-center p-4 bg-white shadow-lg rounded-lg">
+          <img class="mx-auto rounded-circle team-img" src="./tem5.jpg" alt="Mahmoud Elbana" />
+          <h4 class="mt-3">Mahmoud Elbana</h4>
+          <p class="text-muted">Full Stack Developer</p>
+        </div>
+      </div>
+
+      <!-- عضو 2 -->
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+        <div class="team-member text-center p-4 bg-white shadow-lg rounded-lg">
+          <img class="mx-auto rounded-circle team-img" src="./tem2.jpg" alt="Osama Ahmed" />
+          <h4 class="mt-3">Osama Ahmed</h4>
+          <p class="text-muted">Full Stack Developer</p>
+        </div>
+      </div>
+
+      <!-- عضو 3 -->
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+        <div class="team-member text-center p-4 bg-white shadow-lg rounded-lg">
+          <img class="mx-auto rounded-circle team-img" src="./tem3.jpg" alt="Reem Saleh" />
+          <h4 class="mt-3">Reem Saleh</h4>
+          <p class="text-muted">Frontend Developer</p>
+        </div>
+      </div>
+
+      <!-- عضو 4 -->
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+        <div class="team-member text-center p-4 bg-white shadow-lg rounded-lg">
+          <img class="mx-auto rounded-circle team-img" src="./tem4.jpg" alt="Ibrahim Al-Rashidi" />
+          <h4 class="mt-3">Ibrahim Al-Rashidi</h4>
+          <p class="text-muted">Flutter Developer</p>
+        </div>
+      </div>
+
+      <!-- عضو 5 -->
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+        <div class="team-member text-center p-4 bg-white shadow-lg rounded-lg">
+          <img class="mx-auto rounded-circle team-img" src="./tem1.jpg" alt="Rawan Emad" />
+          <h4 class="mt-3">Rawan Emad</h4>
+          <p class="text-muted">Frontend Developer</p>
+        </div>
+      </div>
+
+      <!-- عضو 6 -->
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+        <div class="team-member text-center p-4 bg-white shadow-lg rounded-lg">
+          <img class="mx-auto rounded-circle team-img" src="./tem6.jpg" alt="Ziyad Al-heela" />
+          <h4 class="mt-3">Ziyad Al-heela</h4>
+          <p class="text-muted">UI/UX Designer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- نص أسفل الفريق -->
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-auto text-center" data-aos="fade-up" data-aos-delay="700">
+        <p class="large text-muted">
+          At Qodix, our team is our greatest asset. Each member brings unique expertise and creativity.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CSS إضافي -->
+<style>
+  .team-img {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .team-member:hover .team-img {
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+  .team-member {
+    transition: transform 0.4s ease;
+  }
+  .team-member:hover {
+    transform: translateY(-8px);
+  }
+</style>
+
+<!-- مكتبة الحركات -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({ duration: 900, once: true });
+</script>
+<!-- ----------kleen------------ -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  /* خلفية احترافية */
+  #testimonials {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+  }
+
+  /* دوائر مضيئة */
+  #testimonials::before,
+  #testimonials::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.3;
+    z-index: 0;
+  }
+  #testimonials::before {
+    width: 300px;
+    height: 300px;
+    background: #60a5fa;
+    top: -50px;
+    left: -80px;
+  }
+  #testimonials::after {
+    width: 300px;
+    height: 300px;
+    background: #fbbf24;
+    bottom: -50px;
+    right: -80px;
+  }
+
+  /* كروت مضيئة */
+  .testimonial-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    position: relative;
+    transition: all 0.3s ease;
+    z-index: 1;
+    text-align: center;
+  }
+  .testimonial-card:hover {
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    transform: translateY(-5px);
+  }
+
+  /* أيقونة يوزر */
+  .testimonial-icon {
+    font-size: 3rem;
+    color: #3b82f6;
+    margin-bottom: 1rem;
+  }
+
+  /* نص */
+  .testimonial-text {
+    color: #374151;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    font-weight: bold;
+    color: #111827;
+    font-size: 1.1rem;
+  }
+
+  .testimonial-role {
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  /* فورم إضافة رأي */
+  .testimonial-form {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .testimonial-form input,
+  .testimonial-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+  .testimonial-form button {
+    background: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .testimonial-form button:hover {
+    background: #2563eb;
+  }
+</style>
+
+<section class="py-20" id="testimonials">
+  <div class="container mx-auto px-4 relative z-10">
+    <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">
+      آراء عملائنا <span class="section-title-icon">💬</span>
+    </h2>
+    <p class="text-center text-gray-500 mb-12 text-lg">
+      شوف الناس اللي جربتنا بيقولوا إيه
+    </p>
+
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper" id="testimonial-list">
+        <!-- يتم ملؤها ديناميكياً من السيرفر -->
+      </div>
+      <div class="swiper-button-next text-gray-700"></div>
+      <div class="swiper-button-prev text-gray-700"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- فورم إضافة رأي -->
+    <form id="testimonialForm" class="testimonial-form" data-aos="fade-up" data-aos-delay="300">
+      <h3 class="text-xl font-bold mb-4 text-gray-800 text-center">أضف رأيك</h3>
+      <input type="text" name="Name" placeholder="اسمك" required>
+      <input type="text" name="JobOrCompany" placeholder="وظيفتك أو شركتك">
+      <textarea rows="4" name="Opinion" placeholder="أكتب رأيك هنا..." required></textarea>
+      <button type="submit">إرسال</button>
+    </form>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: { delay: 4000, disableOnInteraction: false },
+    slidesPerView: 1,
+    spaceBetween: 24,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    },
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+  });
+
+  AOS.init({ duration: 800, once: true });
+
+  const testimonialList = document.getElementById("testimonial-list");
+  const form = document.getElementById("testimonialForm");
+
+  // جلب الآراء من السيرفر
+  async function loadTestimonials() {
+    try {
+      const res = await fetch("/api/Testimonial");
+      const data = await res.json();
+      testimonialList.innerHTML = "";
+
+      data.forEach((t) => {
+        testimonialList.innerHTML += `
+          <div class="swiper-slide testimonial-card" data-aos="zoom-in">
+            <i class="fas fa-user-circle testimonial-icon"></i>
+            <p class="testimonial-text">${t.Opinion}</p>
+            <div>
+              <div class="testimonial-author">${t.Name}</div>
+              <div class="testimonial-role">${t.JobOrCompany || ""}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      swiper.update();
+      AOS.refresh();
+    } catch (error) {
+      console.error("Error loading testimonials", error);
+    }
+  }
+
+  // إرسال رأي جديد
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    try {
+      const res = await fetch("/api/Testimonial", {
+        method: "POST",
+        body: formData
+      });
+      if (!res.ok) throw new Error("Failed to submit testimonial");
+      form.reset();
+      loadTestimonials();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  // تحميل الآراء عند فتح الصفحة
+  loadTestimonials();
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- ---------------POST--------------- -->
+
+
+
+
+
+     <!--------------------------- Contact----------------------------->
+    
+
+
+
+   
+
+<script>
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_EXTS = ['pdf','zip','jpg','jpeg','png','gif','bmp','webp'];
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const files = document.getElementById('attachments').files;
+    let valid = true;
+
+    // تحقق من الملفات
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const ext = file.name.split('.').pop().toLowerCase();
+        if (!ALLOWED_EXTS.includes(ext) || file.size > MAX_FILE_SIZE) {
+            valid = false;
+            break;
+        }
+    }
+
+    if (!valid) {
+        document.getElementById('fileError').classList.remove('d-none');
+        return;
+    } else {
+        document.getElementById('fileError').classList.add('d-none');
+    }
+
+    // إعداد البيانات
+    const formData = new FormData();
+    formData.append('FullName', document.getElementById('name').value);
+    formData.append('Email', document.getElementById('email').value);
+    formData.append('Phone', document.getElementById('phone').value);
+    formData.append('Description', document.getElementById('message').value);
+    formData.append('Date', new Date().toISOString().split('T')[0]);
+    formData.append('Time', new Date().toLocaleTimeString());
+
+    if (files.length > 0) {
+        formData.append('file', files[0]);
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/api/Appointment', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            console.log('Success:', data);
+            document.getElementById('submitSuccessMessage').classList.remove('d-none');
+            document.getElementById('submitErrorMessage').classList.add('d-none');
+            form.reset();
+            loadDashboardAppointments();
+        } else {
+            const errorText = await res.text();
+            console.error('Server Error:', errorText);
+            document.getElementById('submitErrorMessage').classList.remove('d-none');
+            document.getElementById('submitSuccessMessage').classList.add('d-none');
+        }
+    } catch (err) {
+        console.error('Fetch Error:', err);
+        document.getElementById('submitErrorMessage').classList.remove('d-none');
+        document.getElementById('submitSuccessMessage').classList.add('d-none');
+    }
+});
+
+// === Dashboard ===
+async function loadDashboardAppointments() {
+    try {
+        const res = await fetch('http://localhost:3000/api/Appointment');
+        const appointments = await res.json();
+        const container = document.getElementById('dashboardAppointments');
+        if (!container) return;
+
+        container.innerHTML = '';
+        appointments.forEach(a => {
+            const div = document.createElement('div');
+            div.className = 'appointment-item';
+            div.innerHTML = `
+                <strong>${a.FullName}</strong> (${a.Email})<br>
+                ${a.Phone}<br>
+                ${a.Description}<br>
+                ${a.Date} ${a.Time}<br>
+                ${a.file ? `<a href="http://localhost:3000/${a.file}" target="_blank">View Attachment</a>` : ''}
+                <hr>
+            `;
+            container.appendChild(div);
+        });
+    } catch (err) {
+        console.error('Error loading appointments:', err);
+    }
+}
+loadDashboardAppointments();
+</script>
+
+
+        <!---------------------- Footer---------------------------------------------------------->
+<footer class="footer py-5">
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+
+      <!-- شعار الشركة -->
+      <div class="col-lg-3 text-center text-lg-start">
+        <img src="./WhatsApp Image 2025-08-24 at 10.03.11_87e1823e.png" alt="Company Logo" class="footer-logo">
+      </div>
+
+      <!-- روابط العمل الحر باستخدام صور -->
+      <div class="col-lg-3 text-center">
+        <h6 class="text-uppercase fw-bold mb-3">Freelance Platforms</h6>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="#!" title="Upwork" class="platform-link">
+            <img src="./upwork.png" alt="Upwork" class="platform-logo">
+          </a>
+          <a href="#!" title="Fiverr" class="platform-link">
+            <img src="./fiverr.png" alt="Fiverr" class="platform-logo">
+          </a>
+          <a href="#!" title="Dribbble" class="platform-link">
+            <img src="./dribbble.png" alt="Dribbble" class="platform-logo">
+          </a>
+          <a href="#!" title="Dribbble" class="platform-link">
+            <img src="./freelancer.png" alt="Freelancer" class="platform-logo">
+          </a>
+          <a href="#!" title="Dribbble" class="platform-link">
+            <img src="./toptal.png" alt="Toptal" class="platform-logo">
+          </a>
+        </div>
+      </div>
+
+      <!-- روابط التواصل الاجتماعي -->
+      <div class="col-lg-3 text-center">
+        <h6 class="text-uppercase fw-bold mb-3">Follow Us</h6>
+        <div class="d-flex justify-content-center gap-2 flex-wrap">
+          <a href="#!" class="btn-social social-facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#!" class="btn-social social-twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#!" class="btn-social social-instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- معلومات الاتصال -->
+      <div class="col-lg-3 text-center text-lg-end">
+        <h6 class="text-uppercase fw-bold mb-3">Contact Info</h6>
+        <p class="mb-1"><i class="fas fa-envelope me-2"></i> info.qodix@gmail.com</p>
+        <p class="mb-1"><i class="fas fa-phone me-2"></i> +20 155 580 16258</p>
+        <p class="mb-0">&copy; 2023 Qodix. All Rights Reserved.</p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background: linear-gradient(90deg, #0d6efd, #6f42c1);
+  color: #fff;
+  font-size: 0.9rem;
+  border-top: 1px solid #222;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  transition: all 0.3s ease;
+}
+
+.footer h6 {
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.footer p, .footer a {
+  color: #bbb;
+  transition: all 0.3s ease;
+}
+
+.footer a:hover {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.footer-logo {
+  height: 150px;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+}
+
+/* روابط مواقع العمل الحر كصور */
+.platform-logo {
+  height: 40px;
+  width: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.platform-logo:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* أيقونات التواصل الاجتماعي */
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: #161b22;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.btn-social:hover {
+  background-color: #0d6efd;
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+/* ألوان خاصة لكل شبكة تواصل */
+.social-facebook:hover { background-color: #1877f2; }
+.social-twitter:hover { background-color: #1da1f2; }
+.social-instagram:hover { background-color: #e1306c; }
+
+@media (max-width: 992px) {
+  .footer .text-lg-start,
+  .footer .text-lg-end,
+  .footer .text-center {
+    text-align: center !important;
+  }
+  .footer .col-lg-3 {
+    margin-bottom: 1.5rem;
+  }
+}
+</style>
+
+  
+<!-- أيقونة واتساب احترافية -->
+<a href="https://wa.me/201558016258" target="_blank" class="whatsapp-btn">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<style>
+/* وضع الأيقونة ثابتة في أسفل يمين الصفحة */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background-color: #25D366;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* صورة الأيقونة داخل الدائرة */
+.whatsapp-btn img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+/* حركة عند المرور على الأيقونة */
+.whatsapp-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.whatsapp-btn:hover img {
+  transform: rotate(-20deg) scale(1.2);
+}
+
+/* استجابة للأجهزة الصغيرة */
+@media (max-width: 480px) {
+  .whatsapp-btn {
+    width: 60px;
+    height: 60px;
+    bottom: 15px;
+    right: 15px;
+  }
+  .whatsapp-btn img {
+    width: 30px;
+    height: 30px;
+  }
+}
+</style>
+
+
+
+         </body>
+</html>

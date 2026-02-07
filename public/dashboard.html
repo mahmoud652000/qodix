@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>لوحة التحكم — مُحسَّنة</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0f1724; --card:rgba(255,255,255,0.03); --muted:#94a3b8; --text:#e6eef8; --brand:#0ea5e9;
+    --glass: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box}
+  body{ background:var(--bg); color:var(--text); font-family:"Cairo", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; margin:0; }
+  .app{ display:grid; grid-template-columns:260px 1fr; min-height:100vh; gap:0; }
+  .sidebar{ background:linear-gradient(180deg, rgba(14,165,233,.12), transparent 30%), #071022; border-inline-end:1px solid rgba(255,255,255,.04); padding-bottom:16px; }
+  .sidebar .brand{ display:flex; align-items:center; gap:10px; padding:18px; border-bottom:1px solid rgba(255,255,255,.04)}
+  .brand .logo{ width:44px; height:44px; border-radius:10px; background:var(--brand); display:grid; place-items:center; color:#042033; font-weight:800; font-size:18px; box-shadow:0 4px 14px rgba(14,165,233,.08); }
+  .nav-link{ color:#dbeafe; border-radius:10px; padding:.65rem .9rem; display:flex; align-items:center; gap:.6rem; cursor:pointer; user-select:none; }
+  .nav-link:hover{ background:rgba(14,165,233,.08); color:#fff; transform: translateX(-3px); transition:all .12s ease; }
+  .nav-link.active{ background:linear-gradient(90deg, rgba(14,165,233,.14), rgba(14,165,233,.06)); color:#fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); }
+  .content{ display:grid; grid-template-rows:auto 1fr; min-height:100vh; }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid rgba(255,255,255,.04); background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
+  .card{ background:var(--card); border:none; border-radius:12px; box-shadow: 0 6px 18px rgba(2,6,23,.4); }
+  .section-title{ color:#dbeafe; font-weight:700; }
+  .muted{ color:var(--muted); }
+  .img-thumb{ width:100%; height:180px; object-fit:cover; border-radius:10px; }
+  .badge-soft{ background:rgba(255,255,255,.04); color:#e6eef8; border:1px solid rgba(255,255,255,.03) }
+  .btn-brand{ background:var(--brand); color:#042033; border: none; font-weight:600; }
+  .btn-brand:hover{ background:#0898d0; color:#fff; }
+  .table-dark{ --bs-table-bg:transparent; --bs-table-striped-bg:rgba(255,255,255,.03); --bs-table-striped-color:#fff; color:#e6eef8; }
+  .grid{ display:grid; gap:1rem; }
+  .grid-3{ grid-template-columns:repeat(3,1fr) }
+  .grid-2{ grid-template-columns:repeat(2,1fr) }
+  .small-alert{ transition: all .25s ease; }
+  .fade-in{ animation: fadeIn .28s ease both; }
+  @keyframes fadeIn { from{ opacity:0; transform: translateY(6px) } to{ opacity:1; transform: translateY(0) } }
+  @media(max-width:992px){
+    .app{ grid-template-columns:1fr }
+    .sidebar{ position:fixed; z-index:1000; inset:0 auto 0 0; transform:translateX(100%); width:82%; transition:.25s; overflow:auto; }
+    .sidebar.open{ transform:translateX(0) }
+    .content{ margin-inline-start:0 }
+  }
+  /* toast box */
+  #toastBox{ position:fixed; z-index:2000; left:20px; top:20px; display:flex; flex-direction:column; gap:8px; }
+  .toast-item{ min-width:220px; max-width:380px; padding:10px 12px; border-radius:10px; color:#042033; font-weight:600; box-shadow:0 8px 30px rgba(2,6,23,.5); }
+  .toast-success{ background: #b7f0ff; }
+  .toast-error{ background:#ffd1d1; }
+  .toast-info{ background:#e7f8ff; }
+  /* subtle input focus */
+  input:focus, textarea:focus, select:focus { outline: none; box-shadow: 0 6px 20px rgba(14,165,233,.06); border-color: rgba(14,165,233,.2); }
+</style>
+</head>
+<body>
+
+<div id="toastBox"></div>
+
+<div class="app">
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <div class="logo" id="brandLogo">A</div>
+      <div>
+        <div class="fw-bold">لوحة التحكم</div>
+        <div class="small muted" id="apiBaseShow">API: …</div>
+      </div>
+    </div>
+
+    <nav class="p-3 d-grid gap-2" id="navList">
+      <div class="nav-link active" data-target="home"><i class="fa-solid fa-house"></i> الصفحة الرئيسية</div>
+      <div class="nav-link" data-target="projects"><i class="fa-solid fa-folder-tree"></i> المشاريع</div>
+      <div class="nav-link" data-target="posts"><i class="fa-solid fa-images"></i> المنشورات</div>
+      <div class="nav-link" data-target="appointments"><i class="fa-solid fa-calendar-check"></i> المواعيد</div>
+      <div class="nav-link" data-target="technologies"><i class="fa-solid fa-microchip"></i> التقنيات</div>
+      <div class="nav-link" data-target="testimonials"><i class="fa-solid fa-comment-dots"></i> آراء العملاء</div>
+      <div class="nav-link" data-target="users"><i class="fa-solid fa-user-group"></i> المستخدمون</div>
+      <div class="nav-link" data-target="settings"><i class="fa-solid fa-gear"></i> الإعدادات</div>
+    </nav>
+
+    <div class="px-3 pb-3">
+      <div class="card p-3 mt-3">
+        <div class="small muted mb-2">شركاء</div>
+        <div class="d-flex flex-wrap gap-2" id="partners">
+          <img src="https://dummyimage.com/60x28/0ea5e9/ffffff.png&text=P1" class="rounded" alt="">
+          <img src="https://dummyimage.com/60x28/64748b/ffffff.png&text=P2" class="rounded" alt="">
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="content">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-light d-lg-none" id="toggleSidebar"><i class="fa-solid fa-bars"></i></button>
+        <span class="muted">مرحباً، <span id="whoami">زائر</span></span>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-light btn-sm" id="btnLogin"><i class="fa-solid fa-right-to-bracket"></i> دخول</button>
+        <button class="btn btn-outline-light btn-sm" id="btnLogout" style="display:none"><i class="fa-solid fa-arrow-right-from-bracket"></i> خروج</button>
+      </div>
+    </div>
+
+    <!-- Views container -->
+    <div class="p-3 p-lg-4">
+
+      <!-- HOME -->
+      <section id="view-home" class="d-block fade-in">
+        <h3 class="section-title mb-3">الصفحة الرئيسية</h3>
+        <div class="grid grid-3 mb-3">
+          <div class="card p-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="muted small">المشاريع</div>
+                <div class="fs-3 fw-bold" id="statProjects">0</div>
+              </div>
+              <i class="fa-solid fa-folder-open fa-2x text-info"></i>
+            </div>
+          </div>
+          <div class="card p-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="muted small">المنشورات</div>
+                <div class="fs-3 fw-bold" id="statPosts">0</div>
+              </div>
+              <i class="fa-solid fa-image fa-2x text-warning"></i>
+            </div>
+          </div>
+          <div class="card p-3">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="muted small">المواعيد</div>
+                <div class="fs-3 fw-bold" id="statAppointments">0</div>
+              </div>
+              <i class="fa-solid fa-calendar-check fa-2x text-success"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">نظرة عامة</h5>
+              <button class="btn btn-sm btn-outline-light" id="refreshHome"><i class="fa-solid fa-rotate"></i></button>
+            </div>
+            <canvas id="homeChart" height="100"></canvas>
+          </div>
+          <div class="card p-3">
+            <h5 class="mb-3">أحدث المواعيد</h5>
+            <div class="table-responsive" style="max-height:280px">
+              <table class="table table-dark table-striped align-middle small mb-0">
+                <thead><tr><th>الاسم</th><th>البريد</th><th>التاريخ</th><th>الملف</th></tr></thead>
+                <tbody id="homeLastAppointments"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="view-projects" class="d-none">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="section-title mb-0">المشاريع</h3>
+          <div class="d-flex gap-2">
+            <input id="projSearch" class="form-control form-control-sm" placeholder="بحث بالاسم أو التقنية">
+            <select id="projFilter" class="form-select form-select-sm">
+              <option value="all">كل الأنواع</option>
+              <option value="web">Web</option><option value="flutter">Flutter</option><option value="design">Design</option>
+            </select>
+            <button class="btn btn-brand btn-sm" id="openProjectForm"><i class="fa-solid fa-plus"></i> إضافة</button>
+            <button class="btn btn-outline-light btn-sm" id="reloadProjects"><i class="fa-solid fa-rotate"></i></button>
+          </div>
+        </div>
+
+        <div class="row g-3" id="projectsGrid"></div>
+
+        <div class="card p-3 mt-3" id="projectEditorCard" style="display:none">
+          <h5 class="mb-2">إضافة / تعديل مشروع</h5>
+          <form id="projectForm" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="p_id">
+            <div class="row g-2">
+              <div class="col-md-4"><input class="form-control form-control-sm" name="Name" id="p_name" placeholder="الاسم" required></div>
+              <div class="col-md-8"><input class="form-control form-control-sm" name="ProjectLink" id="p_link" placeholder="رابط المشروع (اختياري)"></div>
+              <div class="col-12"><textarea class="form-control form-control-sm" name="Description" id="p_desc" rows="2" placeholder="الوصف" required></textarea></div>
+              <div class="col-md-3">
+                <select class="form-select form-select-sm" name="ProjectType" id="p_type">
+                  <option value="web">Web</option><option value="flutter">Flutter</option><option value="design">Design</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <input class="form-control form-control-sm" id="p_techInput" placeholder="أضف تقنية واضغط إضافة">
+                <div class="small muted mt-1">التقنيات: <span id="p_techTags"></span></div>
+              </div>
+              <div class="col-md-2"><button type="button" id="p_addTech" class="btn btn-outline-info btn-sm w-100">إضافة تقنية</button></div>
+              <div class="col-md-2"><input class="form-control form-control-sm" type="file" id="p_image" accept="image/*"></div>
+            </div>
+            <div class="mt-2 d-flex gap-2">
+              <button class="btn btn-brand btn-sm" type="submit" id="p_saveBtn"><i class="fa-solid fa-floppy-disk"></i> حفظ</button>
+              <button class="btn btn-secondary btn-sm" type="button" id="p_reset">تفريغ</button>
+              <button class="btn btn-outline-light btn-sm ms-auto" type="button" id="closeProjectEditor">إغلاق</button>
+            </div>
+            <div id="p_alert" class="mt-2 small small-alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- POSTS -->
+      <section id="view-posts" class="d-none">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="section-title mb-0">المنشورات</h3>
+          <div class="d-flex gap-2">
+            <button class="btn btn-brand btn-sm" id="openPostForm"><i class="fa-solid fa-plus"></i> منشور جديد</button>
+            <button class="btn btn-outline-light btn-sm" id="reloadPosts"><i class="fa-solid fa-rotate"></i></button>
+          </div>
+        </div>
+
+        <div class="row g-3" id="postsGrid"></div>
+
+        <div class="card p-3 mt-3" id="postEditorCard" style="display:none">
+          <h5 class="mb-2">إضافة منشور</h5>
+          <form id="postForm" enctype="multipart/form-data">
+            <div class="row g-2">
+              <div class="col-md-8"><input class="form-control form-control-sm" name="Text" id="post_text" placeholder="نص المنشور" required></div>
+              <div class="col-md-4"><input class="form-control form-control-sm" type="file" id="post_photos" multiple accept="image/*"></div>
+            </div>
+            <div class="mt-2 d-flex gap-2">
+              <button class="btn btn-brand btn-sm" type="submit"><i class="fa-solid fa-paper-plane"></i> نشر</button>
+              <button class="btn btn-secondary btn-sm" type="button" id="post_reset">تفريغ</button>
+              <button class="btn btn-outline-light btn-sm ms-auto" type="button" id="closePostEditor">إغلاق</button>
+            </div>
+            <div id="post_alert" class="mt-2 small small-alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- APPOINTMENTS -->
+      <section id="view-appointments" class="d-none">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="section-title mb-0">المواعيد</h3>
+          <button class="btn btn-outline-light btn-sm" id="reloadAppointments"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+        <div class="grid grid-2 mb-3">
+          <div class="card p-3">
+            <h6 class="mb-2">نموذج إضافة موعد</h6>
+            <form id="appointmentForm" enctype="multipart/form-data">
+              <div class="row g-2">
+                <div class="col-md-6"><input class="form-control form-control-sm" name="FullName" placeholder="الاسم الكامل" required></div>
+                <div class="col-md-6"><input class="form-control form-control-sm" name="Email" placeholder="البريد"></div>
+                <div class="col-md-6"><input class="form-control form-control-sm" name="Phone" placeholder="الهاتف"></div>
+                <div class="col-md-3"><input class="form-control form-control-sm" name="Date" type="date" placeholder="تاريخ"></div>
+                <div class="col-md-3"><input class="form-control form-control-sm" name="Time" type="time" placeholder="وقت"></div>
+                <div class="col-12"><textarea class="form-control form-control-sm" name="Description" rows="2" placeholder="الوصف"></textarea></div>
+                <div class="col-md-6"><input class="form-control form-control-sm" type="file" name="file"></div>
+              </div>
+              <div class="mt-2 d-flex gap-2">
+                <button class="btn btn-brand btn-sm" type="submit">حفظ</button>
+                <button class="btn btn-secondary btn-sm" type="reset">تفريغ</button>
+              </div>
+              <div id="appt_alert" class="mt-2 small small-alert"></div>
+            </form>
+          </div>
+          <div class="card p-3">
+            <h6 class="mb-2">جميع المواعيد</h6>
+            <div class="table-responsive" style="max-height:420px">
+              <table class="table table-dark table-striped align-middle small">
+                <thead><tr><th>#</th><th>الاسم</th><th>البريد</th><th>الهاتف</th><th>التاريخ</th><th>وقت</th><th>ملف</th></tr></thead>
+                <tbody id="appointmentsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECHNOLOGIES -->
+      <section id="view-technologies" class="d-none">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="section-title mb-0">التقنيات</h3>
+          <button class="btn btn-outline-light btn-sm" id="reloadTech"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+        <div class="row g-3" id="techGrid"></div>
+
+        <div class="card p-3 mt-3" id="techEditorCard" style="display:none">
+          <h5 class="mb-2">إضافة / تعديل تقنية</h5>
+          <form id="techForm" enctype="multipart/form-data">
+            <input type="hidden" id="t_id">
+            <div class="row g-2">
+              <div class="col-md-6"><input class="form-control form-control-sm" id="t_name" name="TechnologyName" placeholder="اسم التقنية" required></div>
+              <div class="col-md-6"><input class="form-control form-control-sm" type="file" id="t_image" name="Image" accept="image/*"></div>
+            </div>
+            <div class="mt-2 d-flex gap-2">
+              <button class="btn btn-brand btn-sm" type="submit">حفظ</button>
+              <button class="btn btn-secondary btn-sm" type="button" id="t_reset">تفريغ</button>
+              <button class="btn btn-outline-light btn-sm ms-auto" type="button" id="closeTechEditor">إغلاق</button>
+            </div>
+            <div id="t_alert" class="mt-2 small small-alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section id="view-testimonials" class="d-none">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="section-title mb-0">آراء العملاء</h3>
+          <div class="d-flex gap-2">
+            <button class="btn btn-brand btn-sm" id="openTestimonialForm"><i class="fa-solid fa-plus"></i> إضافة رأي</button>
+            <button class="btn btn-outline-light btn-sm" id="reloadTestimonials"><i class="fa-solid fa-rotate"></i></button>
+          </div>
+        </div>
+
+        <div class="row g-3" id="testimonialGrid"></div>
+
+        <div class="card p-3 mt-3" id="testimonialEditorCard" style="display:none">
+          <h5 class="mb-2">إضافة / تعديل رأي</h5>
+          <form id="testimonialForm" enctype="multipart/form-data">
+            <input type="hidden" id="tt_id">
+            <div class="row g-2">
+              <div class="col-md-6"><input class="form-control form-control-sm" id="tt_name" name="Name" placeholder="الاسم" required></div>
+              <div class="col-md-6"><input class="form-control form-control-sm" id="tt_job" name="JobOrCompany" placeholder="الوظيفة/الشركة"></div>
+              <div class="col-12"><textarea class="form-control form-control-sm" id="tt_opinion" name="Opinion" rows="2" placeholder="الرأي" required></textarea></div>
+              <div class="col-md-6"><input class="form-control form-control-sm" type="file" id="tt_image" name="Image" accept="image/*"></div>
+            </div>
+            <div class="mt-2 d-flex gap-2">
+              <button class="btn btn-brand btn-sm" type="submit">حفظ</button>
+              <button class="btn btn-secondary btn-sm" type="button" id="tt_reset">تفريغ</button>
+              <button class="btn btn-outline-light btn-sm ms-auto" type="button" id="closeTestimonialEditor">إغلاق</button>
+            </div>
+            <div id="tt_alert" class="mt-2 small small-alert"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- USERS -->
+      <section id="view-users" class="d-none">
+        <h3 class="section-title mb-2">المستخدمون</h3>
+        <div class="alert alert-info">
+          لا يوجد Endpoint لعرض/إدارة المستخدمين في السيرفر الحالي. المتاح فقط <code>POST /api/auth/login</code>.
+        </div>
+        <div class="card p-3">
+          <h6 class="mb-2">تجربة تسجيل الدخول</h6>
+          <form id="loginForm" class="row g-2">
+            <div class="col-md-4"><input class="form-control form-control-sm" name="username" placeholder="اسم المستخدم" required value="admin"></div>
+            <div class="col-md-4"><input class="form-control form-control-sm" name="password" placeholder="كلمة المرور" required value="1234" type="password"></div>
+            <div class="col-md-4"><button class="btn btn-brand btn-sm w-100" type="submit">تسجيل الدخول</button></div>
+          </form>
+          <div id="login_alert" class="mt-2 small"></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="view-settings" class="d-none">
+        <h3 class="section-title mb-3">الإعدادات</h3>
+        <div class="grid grid-2">
+          <div class="card p-3">
+            <h6 class="mb-2">إعدادات النظام</h6>
+            <form id="settingsForm" class="row g-2">
+              <div class="col-12">
+                <label class="form-label small">رابط الـ API</label>
+                <input class="form-control form-control-sm" id="set_api" placeholder="http://localhost:3000">
+              </div>
+              <div class="col-6">
+                <label class="form-label small">اختصار الشعار</label>
+                <input class="form-control form-control-sm" id="set_logoText" maxlength="2" placeholder="A">
+              </div>
+              <div class="col-6">
+                <label class="form-label small">الثيم</label>
+                <select class="form-select form-select-sm" id="set_theme">
+                  <option value="dark">داكن</option>
+                  <option value="light">فاتح</option>
+                </select>
+              </div>
+              <div class="col-12 d-flex gap-2">
+                <button class="btn btn-brand btn-sm" type="submit">حفظ</button>
+                <button class="btn btn-secondary btn-sm" type="button" id="settingsReset">افتراضي</button>
+              </div>
+              <div id="settings_alert" class="mt-2 small"></div>
+            </form>
+          </div>
+          <div class="card p-3">
+            <h6 class="mb-2">شركاء (عرض جانبي)</h6>
+            <div class="d-flex gap-2 mb-2">
+              <input class="form-control form-control-sm" id="partner_add" placeholder="رابط صورة الشريك">
+              <button class="btn btn-outline-light btn-sm" id="partner_add_btn">إضافة</button>
+            </div>
+            <div id="partner_list" class="d-flex flex-wrap gap-2"></div>
+            <div class="small muted mt-2">تُحفظ محلياً في المتصفح.</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Scripts -->
+<script src="./script.js"></script>
+</body>
+</html>
