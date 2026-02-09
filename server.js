@@ -21,5 +21,11 @@ app.use('/api/Technology', require('./routes/technology'));
 app.use('/api/Testimonial', require('./routes/testimonial'));
 app.use('/api/auth', require('./routes/auth'));
 
-// مهم جداً لـ Vercel
+// استماع على المنفذ (Railway أو محلي)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// للحفاظ على التوافق مع Vercel (Serverless)
 module.exports = app;
