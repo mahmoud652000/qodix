@@ -5,12 +5,12 @@ const path = require('path');
 
 const app = express();
 
-// Middleware عام
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ملفات ثابتة
+// Static files
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -22,6 +22,5 @@ app.use('/api/Technology', require('./routes/technology'));
 app.use('/api/Testimonial', require('./routes/testimonial'));
 app.use('/api/auth', require('./routes/auth'));
 
-// بدء السيرفر
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// مهم جداً لـ Vercel
+module.exports = app;
