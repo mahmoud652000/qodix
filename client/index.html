@@ -579,41 +579,42 @@ function logout() {
   </div>
 </section>
 
-<!-- ScrollReveal Library -->
 <script src="https://unpkg.com/scrollreveal"></script>
 
 <script>
+const SERVER_URL = 'http://localhost:3000'; // غيّرها إذا رفعت السيرفر
+
 async function loadProjects() {
   try {
-    const baseURL = window.location.origin; // ديناميكي حسب السيرفر الحالي
-    const res = await fetch(`${baseURL}/api/Project`);
+    const res = await fetch(`${SERVER_URL}/api/Project`);
     const projects = await res.json();
 
     const container = document.getElementById('portfolio-container');
     container.innerHTML = '';
 
     projects.forEach((p, index) => {
-      const item = document.createElement('div');
       const type = p.ProjectType?.toLowerCase() || "web";
+      const item = document.createElement('div');
       item.className = "col-lg-4 col-sm-6 portfolio-item";
       item.setAttribute("data-category", type);
 
+      // أيقونة ونوع المشروع
       let typeIcon = "fas fa-th-large", typeColor = "primary";
-      if(type === "web") { typeIcon = "fas fa-globe"; typeColor = "primary"; }
-      if(type === "flutter") { typeIcon = "fab fa-flutter"; typeColor = "info"; }
-      if(type === "design") { typeIcon = "fas fa-paint-brush"; typeColor = "warning"; }
+      if(type === "web") typeIcon = "fas fa-globe";
+      if(type === "flutter") typeIcon = "fab fa-flutter", typeColor = "info";
+      if(type === "design") typeIcon = "fas fa-paint-brush", typeColor = "warning";
 
+      // تقنيات المشروع
       let techBadges = "";
       try {
         const techArray = Array.isArray(p.UsedTechnology) ? p.UsedTechnology : JSON.parse(p.UsedTechnology || "[]");
-        techArray.forEach(t => {
-          techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`;
-        });
+        techArray.forEach(t => techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`);
       } catch(e) { console.warn("UsedTechnology parse error", e); }
 
+      // محتوى المشروع
       item.innerHTML = `
         <div class="portfolio-card rounded shadow-sm overflow-hidden position-relative">
-          <img src="${baseURL}/${p.Image?.replace(/\\/g,'/')}" class="img-fluid w-100 card-img" alt="${p.Name}">
+          <img src="${SERVER_URL}/upload/${p.Image}" class="img-fluid w-100 card-img" alt="${p.Name}">
           <div class="overlay d-flex flex-column justify-content-end p-3">
             <span class="badge bg-${typeColor} mb-2 text-uppercase">
               <i class="${typeIcon} me-1"></i>${type}
@@ -628,16 +629,8 @@ async function loadProjects() {
 
       container.appendChild(item);
 
-      // ScrollReveal effect
-      ScrollReveal().reveal(item, {
-        delay: index * 100,
-        distance: '50px',
-        origin: 'bottom',
-        opacity: 0,
-        easing: 'ease-in-out',
-        duration: 800,
-        reset: false
-      });
+      // تأثير ScrollReveal
+      ScrollReveal().reveal(item, { delay: index*100, distance: '50px', origin: 'bottom', opacity: 0, easing: 'ease-in-out', duration: 800 });
     });
 
     initFilter();
@@ -654,9 +647,9 @@ function initFilter() {
       btn.classList.add('active');
 
       const category = btn.getAttribute('data-filter');
-      const portfolioItems = document.querySelectorAll('.portfolio-item');
+      const items = document.querySelectorAll('.portfolio-item');
 
-      portfolioItems.forEach((item, index) => {
+      items.forEach((item, index) => {
         if(category === 'all' || item.getAttribute('data-category') === category) {
           item.style.display = 'block';
           item.style.opacity = 0;
@@ -673,8 +666,10 @@ function initFilter() {
   });
 }
 
+// تحميل المشاريع عند فتح الصفحة
 loadProjects();
 </script>
+
 
 
 
