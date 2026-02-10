@@ -585,7 +585,8 @@ function logout() {
 <script>
 async function loadProjects() {
   try {
-    const res = await fetch('http://localhost:3000/api/Project');
+    const baseURL = window.location.origin; // ديناميكي حسب السيرفر الحالي
+    const res = await fetch(`${baseURL}/api/Project`);
     const projects = await res.json();
 
     const container = document.getElementById('portfolio-container');
@@ -612,7 +613,7 @@ async function loadProjects() {
 
       item.innerHTML = `
         <div class="portfolio-card rounded shadow-sm overflow-hidden position-relative">
-          <img src="http://localhost:3000/${p.Image?.replace(/\\/g,'/')}" class="img-fluid w-100 card-img" alt="${p.Name}">
+          <img src="${baseURL}/${p.Image?.replace(/\\/g,'/')}" class="img-fluid w-100 card-img" alt="${p.Name}">
           <div class="overlay d-flex flex-column justify-content-end p-3">
             <span class="badge bg-${typeColor} mb-2 text-uppercase">
               <i class="${typeIcon} me-1"></i>${type}
@@ -674,6 +675,10 @@ function initFilter() {
 
 loadProjects();
 </script>
+
+
+
+
 
 <style>
 .portfolio-card {
@@ -1623,7 +1628,6 @@ loadDashboardAppointments();
   }
 }
 </style>
-
 
 
          </body>
