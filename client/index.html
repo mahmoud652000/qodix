@@ -581,14 +581,14 @@ function logout() {
 
 <script src="https://unpkg.com/scrollreveal"></script>
 
-<script>
-// const SERVER_URL = 'http://localhost:3000'; // غيّرها إذا رفعت السيرفر
-const SERVER_URL = 'https://raw.githubusercontent.com/mahmoud652000/qodix/refs/heads/master/data/projects.json';
 
+<script>
+
+const JSON_URL = "https://raw.githubusercontent.com/mahmoud652000/qodix/refs/heads/master/data/projects.json";
 
 async function loadProjects() {
   try {
-    const res = await fetch(`${SERVER_URL}/api/Project`);
+    const res = await fetch(JSON_URL);
     const projects = await res.json();
 
     const container = document.getElementById('portfolio-container');
@@ -596,27 +596,36 @@ async function loadProjects() {
 
     projects.forEach((p, index) => {
       const type = p.ProjectType?.toLowerCase() || "web";
+
       const item = document.createElement('div');
       item.className = "col-lg-4 col-sm-6 portfolio-item";
       item.setAttribute("data-category", type);
 
-      // أيقونة ونوع المشروع
-      let typeIcon = "fas fa-th-large", typeColor = "primary";
-      if(type === "web") typeIcon = "fas fa-globe";
-      if(type === "flutter") typeIcon = "fab fa-flutter", typeColor = "info";
-      if(type === "design") typeIcon = "fas fa-paint-brush", typeColor = "warning";
+      // أيقونة حسب النوع
+      let typeIcon = "fas fa-globe";
+      let typeColor = "primary";
+
+      if(type === "flutter") {
+        typeIcon = "fab fa-flutter";
+        typeColor = "info";
+      }
+
+      if(type === "design") {
+        typeIcon = "fas fa-paint-brush";
+        typeColor = "warning";
+      }
 
       // تقنيات المشروع
       let techBadges = "";
-      try {
-        const techArray = Array.isArray(p.UsedTechnology) ? p.UsedTechnology : JSON.parse(p.UsedTechnology || "[]");
-        techArray.forEach(t => techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`);
-      } catch(e) { console.warn("UsedTechnology parse error", e); }
+      if(Array.isArray(p.UsedTechnology)) {
+        p.UsedTechnology.forEach(t => {
+          techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`;
+        });
+      }
 
-      // محتوى المشروع
       item.innerHTML = `
         <div class="portfolio-card rounded shadow-sm overflow-hidden position-relative">
-          <img src="${SERVER_URL}/upload/${p.Image}" class="img-fluid w-100 card-img" alt="${p.Name}">
+          <img src="${p.Image}" class="img-fluid w-100 card-img" alt="${p.Name}">
           <div class="overlay d-flex flex-column justify-content-end p-3">
             <span class="badge bg-${typeColor} mb-2 text-uppercase">
               <i class="${typeIcon} me-1"></i>${type}
@@ -624,55 +633,32 @@ async function loadProjects() {
             <h5 class="fw-bold mb-1">${p.Name}</h5>
             <p class="text-light small mb-2">${p.Description}</p>
             <div class="tech-container d-flex flex-wrap">${techBadges}</div>
-            <a href="${p.ProjectLink || '#'}" target="_blank" class="stretched-link"></a>
+            ${p.ProjectLink ? `<a href="${p.ProjectLink}" target="_blank" class="stretched-link"></a>` : ""}
           </div>
         </div>
       `;
 
       container.appendChild(item);
 
-      // تأثير ScrollReveal
-      ScrollReveal().reveal(item, { delay: index*100, distance: '50px', origin: 'bottom', opacity: 0, easing: 'ease-in-out', duration: 800 });
+      ScrollReveal().reveal(item, {
+        delay: index * 100,
+        distance: '50px',
+        origin: 'bottom',
+        opacity: 0,
+        duration: 800
+      });
     });
 
     initFilter();
+
   } catch(err) {
-    console.error('Error loading projects:', err);
+    console.error("Error loading projects:", err);
   }
 }
 
-function initFilter() {
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const category = btn.getAttribute('data-filter');
-      const items = document.querySelectorAll('.portfolio-item');
-
-      items.forEach((item, index) => {
-        if(category === 'all' || item.getAttribute('data-category') === category) {
-          item.style.display = 'block';
-          item.style.opacity = 0;
-          setTimeout(() => {
-            item.style.opacity = 1;
-            ScrollReveal().reveal(item, { delay: index*50, distance: '20px', origin: 'bottom', opacity: 0, duration: 600 });
-          }, 50);
-        } else {
-          item.style.opacity = 0;
-          setTimeout(() => item.style.display = 'none', 300);
-        }
-      });
-    });
-  });
-}
-
-// تحميل المشاريع عند فتح الصفحة
 loadProjects();
+
 </script>
-
-
 
 
 
