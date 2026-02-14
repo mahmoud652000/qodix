@@ -1,49 +1,36 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const upload = require("../middleware/upload");
-const { readJSON, writeJSON } = require("../utils/jsonHelper");
-const path = "./data/posts.json";
+const Post = require('../models/post');
 
-// POST
-router.post("/", upload.array("Photos", 10), (req, res) => {
-  const posts = readJSON(path);
-  const newPost = {
-    id: Date.now(),
-    Text: req.body.Text,
-    Photos: req.files ? req.files.map((f) => f.path) : [],
-  };
-  posts.push(newPost);
-  writeJSON(path, posts);
-  res.json(newPost);
+// GET جميع البوستات
+router.get('/', async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// GET all
-router.get("/", (req, res) => res.json(readJSON(path)));
-
-// GET by id
-router.get("/:id", (req, res) => {
-  const posts = readJSON(path);
-  const post = posts.find((p) => p.id == req.params.id);
-  res.json(post || {});
+// POST إنشاء بوست جديد
+router.post('/', async (req, res) => {
+  try {
+    const newPost = new Post(req.body);
+    const saved = await newPost.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-// PUT
-router.put("/:id", (req, res) => {
-  const posts = readJSON(path);
-  const idx = posts.findIndex((p) => p.id == req.params.id);
-  if (idx >= 0) {
-    posts[idx].Text = req.body.Text;
-    writeJSON(path, posts);
-    res.json(posts[idx]);
-  } else res.status(404).json({ msg: "Not found" });
-});
-
-// DELETE
-router.delete("/:id", (req, res) => {
-  let posts = readJSON(path);
-  posts = posts.filter((p) => p.id != req.params.id);
-  writeJSON(path, posts);
-  res.json({ msg: "Deleted" });
+// DELETE حذف بوست
+router.delete('/:id', async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;

@@ -5,9 +5,7 @@
     "Description": "\"Customer Requests and Interests\" – easy and clear request submission.",
     "ProjectLink": "",
     "ProjectType": "design",
-    "UsedTechnology": [
-      "Figma , Adobe XD ,Sketch"
-    ],
+    "UsedTechnology": ["Figma , Adobe XD ,Sketch"],
     "TechnologyID": [],
     "Image": "upload/1756318462544-ui-1.jpg"
   },
@@ -17,9 +15,7 @@
     "Description": "Coffee Bean offers an easy and engaging experience for ordering and exploring coffee.",
     "ProjectLink": "",
     "ProjectType": "design",
-    "UsedTechnology": [
-      "Figma , Adobe XD ,Sketch"
-    ],
+    "UsedTechnology": ["Figma , Adobe XD ,Sketch"],
     "TechnologyID": [],
     "Image": "upload/1756319631402-ui_2.jpg"
   },
@@ -29,9 +25,7 @@
     "Description": "Store App – A mobile app for easy clothing shopping with product filters.",
     "ProjectLink": "",
     "ProjectType": "flutter",
-    "UsedTechnology": [
-      "React Native , Flutter,Context AP"
-    ],
+    "UsedTechnology": ["React Native , Flutter,Context AP"],
     "TechnologyID": [],
     "Image": "upload/1756320709579-fluuter_1.jpg"
   },

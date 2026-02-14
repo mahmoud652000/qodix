@@ -581,6 +581,7 @@ function logout() {
 
 <script src="https://unpkg.com/scrollreveal"></script>
 
+<<<<<<< HEAD
 
 <script>
 
@@ -589,6 +590,18 @@ const JSON_URL = "https://raw.githubusercontent.com/mahmoud652000/qodix/refs/hea
 async function loadProjects() {
   try {
     const res = await fetch(JSON_URL);
+=======
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<script>
+// ضع هذا الرابط حسب سيرفرك المحلي أو السيرفر المرفوع
+const SERVER_URL = 'http://localhost:3000'; // أو رابط السيرفر الفعلي
+
+async function loadProjects() {
+  try {
+    const res = await fetch(`${SERVER_URL}/api/Project`);
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+>>>>>>> 0824799 (qodix)
     const projects = await res.json();
 
     const container = document.getElementById('portfolio-container');
@@ -663,6 +676,12 @@ loadProjects();
 
 
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 0824799 (qodix)
 <style>
 .portfolio-card {
   position: relative;
@@ -861,7 +880,7 @@ loadProjects();
 </section>
 
 <!-- مكتبة الحركات -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></>
 <script>
   AOS.init({
     once: true,

@@ -1,42 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../middleware/upload');
-const { readJSON, writeJSON } = require('../utils/jsonHelper');
-const path = './data/technologies.json';
+const Technology = require('../models/technology');
 
-// POST
-router.post('/', upload.single('Image'), (req, res) => {
-    const techs = readJSON(path);
-    const newTech = { id: Date.now(), TechnologyName: req.body.TechnologyName, Image: req.file ? req.file.path : null };
-    techs.push(newTech);
-    writeJSON(path, techs);
-    res.json(newTech);
+// GET جميع التقنيات
+router.get('/', async (req, res) => {
+  try {
+    const techs = await Technology.find();
+    res.json(techs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// GET
-router.get('/', (req, res) => res.json(readJSON(path)));
-
-// PUT
-router.put('/:id', upload.single('Image'), (req, res) => {
-    const techs = readJSON(path);
-    const idx = techs.findIndex(t => t.id == req.params.id);
-    if (idx >= 0) {
-        techs[idx] = {
-            ...techs[idx],
-            TechnologyName: req.body.TechnologyName || techs[idx].TechnologyName,
-            Image: req.file ? req.file.path : techs[idx].Image
-        };
-        writeJSON(path, techs);
-        res.json(techs[idx]);
-    } else res.status(404).json({ msg: 'Not found' });
+// POST إنشاء تقنية جديدة
+router.post('/', async (req, res) => {
+  try {
+    const newTech = new Technology(req.body);
+    const saved = await newTech.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-// DELETE
-router.delete('/:id', (req, res) => {
-    let techs = readJSON(path);
-    techs = techs.filter(t => t.id != req.params.id);
-    writeJSON(path, techs);
-    res.json({ msg: 'Deleted' });
+// DELETE حذف تقنية
+router.delete('/:id', async (req, res) => {
+  try {
+    await Technology.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 module.exports = router;
