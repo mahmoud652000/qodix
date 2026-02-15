@@ -581,27 +581,13 @@ function logout() {
 
 <script src="https://unpkg.com/scrollreveal"></script>
 
-<<<<<<< HEAD
-
 <script>
-
-const JSON_URL = "https://raw.githubusercontent.com/mahmoud652000/qodix/refs/heads/master/data/projects.json";
+const SERVER_URL = 'https://qodix-production.up.railway.app';
 
 async function loadProjects() {
   try {
-    const res = await fetch(JSON_URL);
-=======
-<script src="https://unpkg.com/scrollreveal"></script>
-
-<script>
-// ضع هذا الرابط حسب سيرفرك المحلي أو السيرفر المرفوع
-const SERVER_URL = 'http://localhost:3000'; // أو رابط السيرفر الفعلي
-
-async function loadProjects() {
-  try {
-    const res = await fetch(`${SERVER_URL}/api/Project`);
+    const res = await fetch(`${SERVER_URL}/api/projects`);
     if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
->>>>>>> 0824799 (qodix)
     const projects = await res.json();
 
     const container = document.getElementById('portfolio-container');
@@ -614,21 +600,16 @@ async function loadProjects() {
       item.className = "col-lg-4 col-sm-6 portfolio-item";
       item.setAttribute("data-category", type);
 
-      // أيقونة حسب النوع
       let typeIcon = "fas fa-globe";
       let typeColor = "primary";
-
       if(type === "flutter") {
         typeIcon = "fab fa-flutter";
         typeColor = "info";
-      }
-
-      if(type === "design") {
+      } else if(type === "design") {
         typeIcon = "fas fa-paint-brush";
         typeColor = "warning";
       }
 
-      // تقنيات المشروع
       let techBadges = "";
       if(Array.isArray(p.UsedTechnology)) {
         p.UsedTechnology.forEach(t => {
@@ -662,26 +643,18 @@ async function loadProjects() {
       });
     });
 
-    initFilter();
-
   } catch(err) {
     console.error("Error loading projects:", err);
   }
 }
 
 loadProjects();
-
 </script>
 
 
 
 
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> 0824799 (qodix)
 <style>
 .portfolio-card {
   position: relative;

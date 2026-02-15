@@ -25,11 +25,13 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected ✅'))
   .catch(err => console.log('MongoDB connection error:', err));
 
-
 // API Routes
 app.use('/api/Appointment', require('./routes/appointment'));
 app.use('/api/Post', require('./routes/post'));
-app.use('/routes/project', require('./routes/project'));
+
+// ✅ تعديل مسار Projects ليكون متوافق مع الفرونت
+app.use('/api/projects', require('./routes/project'));
+
 app.use('/api/Technology', require('./routes/technology'));
 app.use('/api/Testimonial', require('./routes/testimonial'));
 app.use('/api/auth', require('./routes/auth'));
