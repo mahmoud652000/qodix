@@ -581,10 +581,8 @@ function logout() {
 
 <script src="https://unpkg.com/scrollreveal"></script>
 
-<script src="https://unpkg.com/scrollreveal"></script>
-
 <script>
-const SERVER_URL = 'https://qodix-production.up.railway.app';
+let SERVER_URL = 'https://qodix-production.up.railway.app';
 
 async function loadProjects() {
   try {
@@ -851,7 +849,7 @@ loadProjects();
 </section>
 
 <!-- مكتبة الحركات -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
   AOS.init({
     once: true,
@@ -1304,12 +1302,8 @@ counters.forEach((counter, index) => {
 
      <!--------------------------- Contact----------------------------->
     
-
-
-
-   
-
 <script>
+// let SERVER_URL = 'https://qodix-production.up.railway.app'; // رابط السيرفر الأونلاين
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_EXTS = ['pdf','zip','jpg','jpeg','png','gif','bmp','webp'];
 
@@ -1347,11 +1341,11 @@ document.getElementById('contactForm').addEventListener('submit', async function
     formData.append('Time', new Date().toLocaleTimeString());
 
     if (files.length > 0) {
-        formData.append('file', files[0]);
+        formData.append('file', files[0]); // رفع الملف الأول فقط
     }
 
     try {
-        const res = await fetch('http://localhost:3000/api/Appointment', {
+        const res = await fetch(`${SERVER_URL}/api/Appointment`, {
             method: 'POST',
             body: formData
         });
@@ -1379,7 +1373,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
 // === Dashboard ===
 async function loadDashboardAppointments() {
     try {
-        const res = await fetch('http://localhost:3000/api/Appointment');
+        const res = await fetch(`${SERVER_URL}/api/Appointment`);
         const appointments = await res.json();
         const container = document.getElementById('dashboardAppointments');
         if (!container) return;
@@ -1393,7 +1387,7 @@ async function loadDashboardAppointments() {
                 ${a.Phone}<br>
                 ${a.Description}<br>
                 ${a.Date} ${a.Time}<br>
-                ${a.file ? `<a href="http://localhost:3000/${a.file}" target="_blank">View Attachment</a>` : ''}
+                ${a.file ? `<a href="${SERVER_URL}/upload/${a.file}" target="_blank">View Attachment</a>` : ''}
                 <hr>
             `;
             container.appendChild(div);
@@ -1402,8 +1396,15 @@ async function loadDashboardAppointments() {
         console.error('Error loading appointments:', err);
     }
 }
+
 loadDashboardAppointments();
 </script>
+
+
+
+   
+
+
 
 
         <!---------------------- Footer---------------------------------------------------------->

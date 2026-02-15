@@ -1,35 +1,73 @@
 const express = require('express');
 const router = express.Router();
 const Project = require('../models/project');
+const multer = require('multer');
+const path = require('path');
 
-// GET جميع المشاريع
+/* ================= Multer Config ================= */
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'upload/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+
+/* ================= GET all projects ================= */
 router.get('/', async (req, res) => {
   try {
-    const projects = await Project.find();
-    res.json(projects);
+    const projects = await Project.find().sort({ createdAt: -1 });
+    res.status(200).json(projects);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 });
 
-// POST إنشاء مشروع جديد
-router.post('/', async (req, res) => {
+/* ================= POST new project ================= */
+router.post('/', upload.single('image'), async (req, res) => {
   try {
-    const newProject = new Project(req.body);
-    const saved = await newProject.save();
-    res.status(201).json(saved);
+    const {
+      Name,
+      Description,
+      ProjectType,
+      ProjectLink,
+      UsedTechnology
+    } = req.body;
+
+    if (!Name || !Description || !ProjectType) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const project = new Project({
+      Name,
+      Description,
+      ProjectType,
+      ProjectLink,
+      UsedTechnology: UsedTechnology ? UsedTechnology.split(',') : [],
+      Image: req.file ? `upload/${req.file.filename}` : ''
+    });
+
+    const savedProject = await project.save();
+    res.status(201).json(savedProject);
+
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 });
 
-// DELETE حذف مشروع
+/* ================= DELETE project ================= */
 router.delete('/:id', async (req, res) => {
   try {
-    await Project.findByIdAndDelete(req.params.id);
+    const deleted = await Project.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Project not found' });
+    }
     res.json({ message: 'Deleted successfully' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message });
   }
 });
 
