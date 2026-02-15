@@ -573,17 +573,17 @@ function logout() {
       </button>
     </div>
 
-    <!-- Projects -->
+    <!-- Projects Container -->
     <div class="row g-4 portfolio-container" id="portfolio-container"></div>
 
   </div>
 </section>
 
 <script src="https://unpkg.com/scrollreveal"></script>
-
 <script>
-let SERVER_URL = 'https://qodix-production.up.railway.app';
+const SERVER_URL = 'https://qodix-production.up.railway.app';
 
+// ==== Load Projects ====
 async function loadProjects() {
   try {
     const res = await fetch(`${SERVER_URL}/api/projects`);
@@ -592,6 +592,13 @@ async function loadProjects() {
 
     const container = document.getElementById('portfolio-container');
     container.innerHTML = '';
+
+    const sr = ScrollReveal({
+      distance: '50px',
+      origin: 'bottom',
+      opacity: 0,
+      duration: 800
+    });
 
     projects.forEach((p, index) => {
       const type = p.ProjectType?.toLowerCase() || "web";
@@ -605,12 +612,15 @@ async function loadProjects() {
       if(type === "flutter") { typeIcon = "fab fa-flutter"; typeColor = "info"; }
       else if(type === "design") { typeIcon = "fas fa-paint-brush"; typeColor = "warning"; }
 
-      let techBadges = "";
-      if(Array.isArray(p.UsedTechnology)) {
-        p.UsedTechnology.forEach(t => { techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`; });
-      }
+      // مسار الصورة
+      const imageUrl = p.Image ? `${SERVER_URL}/${p.Image}` : 'https://via.placeholder.com/400x300?text=No+Image';
 
-      const imageUrl = `${SERVER_URL}/${p.Image}`;
+      let techBadges = '';
+      if(Array.isArray(p.UsedTechnology)) {
+        p.UsedTechnology.forEach(t => {
+          techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`;
+        });
+      }
 
       item.innerHTML = `
         <div class="portfolio-card rounded shadow-sm overflow-hidden position-relative">
@@ -628,23 +638,35 @@ async function loadProjects() {
       `;
 
       container.appendChild(item);
+      sr.reveal(item, { delay: index * 100 });
+    });
 
-      ScrollReveal().reveal(item, {
-        delay: index * 100,
-        distance: '50px',
-        origin: 'bottom',
-        opacity: 0,
-        duration: 800
+    // ==== Filter Buttons ====
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+          if(filter === 'all' || item.dataset.category === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
       });
     });
 
   } catch(err) {
     console.error("Error loading projects:", err);
+    document.getElementById('portfolio-container').innerHTML = '<p class="text-center text-danger">Failed to load projects.</p>';
   }
 }
 
 loadProjects();
 </script>
+
 
 
 

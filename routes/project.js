@@ -14,7 +14,16 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
+const upload = multer({ 
+  storage,
+  fileFilter: (req, file, cb) => {
+    const allowedExt = /jpg|jpeg|png|gif|bmp|webp/;
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowedExt.test(ext)) cb(null, true);
+    else cb(new Error('Only image files are allowed!'));
+  },
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB
+});
 
 /* ================= GET all projects ================= */
 router.get('/', async (req, res) => {
@@ -27,15 +36,9 @@ router.get('/', async (req, res) => {
 });
 
 /* ================= POST new project ================= */
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
   try {
-    const {
-      Name,
-      Description,
-      ProjectType,
-      ProjectLink,
-      UsedTechnology
-    } = req.body;
+    const { Name, Description, ProjectType, ProjectLink, UsedTechnology } = req.body;
 
     if (!Name || !Description || !ProjectType) {
       return res.status(400).json({ message: 'Missing required fields' });

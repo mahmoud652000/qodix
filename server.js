@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* ================= Static Files ================= */
-app.use('./upload', express.static(path.join(__dirname, 'upload')));
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ================= Health Check ================= */
