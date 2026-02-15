@@ -581,6 +581,8 @@ function logout() {
 
 <script src="https://unpkg.com/scrollreveal"></script>
 
+<script src="https://unpkg.com/scrollreveal"></script>
+
 <script>
 const SERVER_URL = 'https://qodix-production.up.railway.app';
 
@@ -602,24 +604,19 @@ async function loadProjects() {
 
       let typeIcon = "fas fa-globe";
       let typeColor = "primary";
-      if(type === "flutter") {
-        typeIcon = "fab fa-flutter";
-        typeColor = "info";
-      } else if(type === "design") {
-        typeIcon = "fas fa-paint-brush";
-        typeColor = "warning";
-      }
+      if(type === "flutter") { typeIcon = "fab fa-flutter"; typeColor = "info"; }
+      else if(type === "design") { typeIcon = "fas fa-paint-brush"; typeColor = "warning"; }
 
       let techBadges = "";
       if(Array.isArray(p.UsedTechnology)) {
-        p.UsedTechnology.forEach(t => {
-          techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`;
-        });
+        p.UsedTechnology.forEach(t => { techBadges += `<span class="badge tech-badge me-1 mb-1">${t}</span>`; });
       }
+
+      const imageUrl = `${SERVER_URL}/${p.Image}`;
 
       item.innerHTML = `
         <div class="portfolio-card rounded shadow-sm overflow-hidden position-relative">
-          <img src="${p.Image}" class="img-fluid w-100 card-img" alt="${p.Name}">
+          <img src="${imageUrl}" class="img-fluid w-100 card-img" alt="${p.Name}">
           <div class="overlay d-flex flex-column justify-content-end p-3">
             <span class="badge bg-${typeColor} mb-2 text-uppercase">
               <i class="${typeIcon} me-1"></i>${type}
@@ -650,6 +647,7 @@ async function loadProjects() {
 
 loadProjects();
 </script>
+
 
 
 
