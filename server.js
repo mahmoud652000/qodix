@@ -20,13 +20,7 @@ app.get('/', (req, res) => {
   res.status(200).send('API is running 🚀');
 });
 
-/* ================= MongoDB ================= */
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected ✅'))
-  .catch(err => console.error('MongoDB error ❌', err));
-
-/* ================= API Routes (lowercase مهم جدًا) ================= */
+/* ================= API Routes ================= */
 app.use('/api/appointment', require('./routes/appointment'));
 app.use('/api/post', require('./routes/post'));
 app.use('/api/projects', require('./routes/project'));
@@ -39,8 +33,22 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Route Not Found' });
 });
 
-/* ================= Start Server ================= */
+/* ================= Start Server AFTER DB ================= */
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('MongoDB connected ✅');
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+
+  } catch (error) {
+    console.error('❌ MongoDB connection failed:', error.message);
+    process.exit(1);
+  }
+}
+
+startServer();
